@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mieszalnik MGT 420 - Specyfikacja Techniczna</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent-purple: #4b0082;
+            --accent-light: #8a2be2;
+            --card-bg: #1a1a1a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+      /* Nawigacja */
+        .navbar {
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(15px);
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 30px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #777;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+            border-radius: 8px 0 8px 0;
+        }
+
+        .lang-btn.active {
+            color: var(--text-color);
+            border-color: var(--accent-light);
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links:hover {
+            color: var(--accent-light);
+        }
+
+        .image-container {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: 50%;
+
+
+            
+        }
+
+                .image-container img {
+                    width: 75%;
+                    height: auto;
+                    display: flex;
+                    align-self: center;
+                    justify-self: center ;
+                    border-radius: 25px 0 25px 0;
+        }
+
+        /* Content */
+        .container { max-width: 1200px; margin: 100px auto 50px; padding: 20px; }
+
+        .header-section {margin-top: 10%; display: flex; text-align: center; margin-bottom: 60px; max-width: 1200px; align-items: center; justify-content: center; }
+        .header-text {width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .header-section h1 { font-size: 3.5rem; font-weight: 900;}
+        .header-section p { color: var(--accent-light); font-weight: 700; letter-spacing: 2px; }
+
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+        .info-box h2 { color: var(--accent-light); margin-bottom: 15px; }
+        .info-box p { text-align: justify; margin-bottom: 15px; }
+
+        /* Listy zalet */
+        .features-list { list-style: none; margin: 20px 0; }
+        .features-list li { margin-bottom: 10px; padding-left: 25px; position: relative; }
+        .features-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-light); font-weight: bold; }
+
+        /* Tabele */
+        .table-wrapper { 
+            background: var(--card-bg); 
+            border-radius: 20px 0 20px 0; 
+            padding: 25px; 
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            margin-bottom: 30px;
+        }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        .data-table th { text-align: left; padding: 10px; color: var(--accent-light); border-bottom: 2px solid #333; }
+        .data-table td { padding: 10px; border-bottom: 1px solid #222; }
+
+        .btn-print {
+            display: block; width: fit-content; margin: 40px auto;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-light));
+            color: white; border: none; padding: 15px 40px;
+            font-weight: 900; text-transform: uppercase; cursor: pointer;
+            border-radius: 20px 0 20px 0;
+            transition: 0.3s ease;
+        }
+        .btn-print:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3); }
+
+        /* Print Engine */
+        @media print {
+            body { background: white; color: black; }
+            .navbar, .btn-print, footer { display: none !important; }
+            .container { margin: 0; max-width: 100%; }
+            .table-wrapper { border: 1px solid #000; background: white; color: black; }
+            .data-table td, .data-table th { color: black !important; border-bottom: 1px solid #ccc; }
+            .header-section h1 { color: black !important; }
+            .header-section p { color: #555 !important; }
+            .main-grid { display: block; }
+            .info-box h2 { color: black !important; border-bottom: 1px solid #000; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="lang-switcher">
+            <button class="lang-btn active" onclick="changeLang('pl')" id="btn-pl">PL</button>
+            <button class="lang-btn" onclick="changeLang('en')" id="btn-en">EN</button>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="/index.html" class="nav-links" data-pl="STRONA GŁÓWNA" data-en="HOME">STRONA GŁÓWNA</a></li>
+            <li><a href="/o_nas.html" class="nav-links" data-pl="O NAS" data-en="ABOUT US">O NAS</a></li>
+            <li><a href="/kontakt.html" class="nav-links" data-pl="KONTAKT" data-en="CONTACT">KONTAKT</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+    <header class="header-section">
+                <div class="image-container">
+    <img class="product" src="/Oferta/Grafiki/420MGT.png" width="1080" height="1080">
+</div>
+<div class="header-text">
+        <h1 data-pl="Mieszalnik Gazów 420MGT" data-en="420MGT Gas Mixer">Mieszalnik Gazów 420MGT</h1>
+        <p data-pl="Modele: 420MGT022 | 420MGT033" data-en="Models: 420MGT022 | 420MGT033">Modele: 420MGT022 | 420MGT033</p>
+   </div>
+    </header>
+
+
+<div class="container">
+
+    <div class="main-grid">
+        <div class="info-box">
+            <h2 data-pl="Opis Systemu" data-en="System Description">Opis Systemu</h2>
+            <p data-pl="Automatyczny mieszalnik 2- lub 3-gazowy przeznaczony do przygotowania jednorodnych mieszanek spawalniczych w procesie quazi-ciągłym. System eliminuje konieczność zakupu gotowych mieszanek, co znacząco redukuje koszty operacyjne i pozwala na pełną niezależność produkcyjną." 
+               data-en="Automatic 2- or 3-gas mixer designed for preparing homogeneous welding mixtures in a quasi-continuous process. The system eliminates the need to purchase ready-made mixtures, significantly reducing operating costs and allowing for full production independence.">
+               Automatyczny mieszalnik 2- lub 3-gazowy przeznaczony do przygotowania jednorodnych mieszanek spawalniczych w procesie quazi-ciągłym. System eliminuje konieczność zakupu gotowych mieszanek, co znacząco redukuje koszty operacyjne i pozwala na pełną niezależność produkcyjną.
+            </p>
+            <ul class="features-list">
+                <li data-pl="Precyzja nastawy: 0,1%" data-en="Setting precision: 0.1%">Precyzja nastawy: 0,1%</li>
+                <li data-pl="Dokładność: >99%" data-en="Accuracy: >99%">Dokładność: >99%</li>
+                <li data-pl="Doskonała jednorodność mieszaniny" data-en="Excellent mixture homogeneity">Doskonała jednorodność mieszaniny</li>
+                <li data-pl="Pełna automatyzacja i prostota obsługi" data-en="Full automation and ease of use">Pełna automatyzacja i prostota obsługi</li>
+            </ul>
+        </div>
+
+        <div class="table-wrapper">
+            <h3 data-pl="Dane Techniczne" data-en="Technical Data">Dane Techniczne</h3>
+            <table class="data-table">
+                <tr><td data-pl="Napięcie zasilania" data-en="Supply voltage">Napięcie zasilania</td><td>230V AC</td></tr>
+                <tr><td data-pl="Ciśnienie zasilania" data-en="Inlet pressure">Ciśnienie zasilania</td><td>7...15 bar</td></tr>
+                <tr><td data-pl="Ciśnienie mieszaniny" data-en="Mixture pressure">Ciśnienie mieszaniny</td><td>4...7 bar</td></tr>
+                <tr><td data-pl="Temperatura otoczenia" data-en="Ambient temperature">Temperatura otoczenia</td><td>+10...+40 °C</td></tr>
+                <tr><td data-pl="Skład mieszaniny (każdy gaz)" data-en="Gas composition (each)">Skład mieszaniny (każdy gaz)</td><td>1...99%</td></tr>
+                <tr><td data-pl="Wymiary szafy (WxSxG)" data-en="Dimensions (HxWxD)">Wymiary szafy (WxSxG)</td><td>70 x 40 x 25 cm</td></tr>
+                <tr><td data-pl="Przyłącza (we/wy)" data-en="Connections (in/out)">Przyłącza (we/wy)</td><td>G1/2u / G1/2w</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <h3 data-pl="Tabela Zamówień" data-en="Ordering Table">Tabela Zamówień</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th data-pl="Składniki" data-en="Components">Składniki</th>
+                    <th data-pl="Wydajność [l/min]" data-en="Capacity [l/min]">Wydajność [l/min]</th>
+                    <th data-pl="Model" data-en="Model">Model</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2</td><td>40</td><td>420MGT022-0040-50</td></tr>
+                <tr><td>3</td><td>40</td><td>420MGT033-0040-50</td></tr>
+                <tr><td>2</td><td>200</td><td>420MGT022-0200-100</td></tr>
+                <tr><td>3</td><td>200</td><td>420MGT033-0200-100</td></tr>
+                <tr><td>2</td><td>500</td><td>420MGT022-0500-100</td></tr>
+                <tr><td>3</td><td>500</td><td>420MGT033-0500-100</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="main-grid">
+        <div class="table-wrapper">
+            <h3 data-pl="Wymagania zbiornika buforowego" data-en="Buffer tank requirements">Wymagania zbiornika buforowego</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 10px; color: #777;" data-pl="(zamawiany osobno)" data-en="(ordered separately)">(zamawiany osobno)</p>
+            <table class="data-table">
+                <tr><td>Typ 420MGT0XX-0040</td><td>min. 50 l</td></tr>
+                <tr><td>Typ 420MGT0XX-0200 i ...-0500</td><td>min. 100 l</td></tr>
+            </table>
+        </div>
+        <div class="table-wrapper">
+            <h3 data-pl="Opcje dodatkowe" data-en="Additional options">Opcje dodatkowe</h3>
+            <ul class="features-list" style="font-size: 0.9rem;">
+                <li data-pl="Moduł monitorowania zawartości tlenu" data-en="Oxygen monitoring module">Moduł monitorowania zawartości tlenu</li>
+                <li data-pl="Wydajność rozszerzona do 2000 l/min" data-en="Capacity extended to 2000 l/min">Wydajność rozszerzona do 2000 l/min</li>
+                <li data-pl="Wersja 4-gazowa" data-en="4-gas version">Wersja 4-gazowa</li>
+            </ul>
+        </div>
+    </div>
+
+    <button class="btn-print" onclick="window.print()" data-pl="Generuj Kartę Techniczną (PDF)" data-en="Generate Tech Sheet (PDF)">Generuj Kartę Techniczną (PDF)</button>
+</div>
+
+<script>
+    function changeLang(lang) {
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+        document.querySelectorAll('[data-pl]').forEach(el => {
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+                el.style.opacity = 1;
+            }, 150);
+        });
+        localStorage.setItem('preferredLang', lang);
+    }
+
+    window.onload = () => {
+        const savedLang = localStorage.getItem('preferredLang') || 'pl';
+        changeLang(savedLang);
+    };
+</script>
+
+</body>
+</html>
